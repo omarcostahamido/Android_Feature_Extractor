@@ -1,4 +1,7 @@
 /* 
+  v0.1-beta2
+    - back to magnetometer :/
+  
   Developed by Omar Costa Hamido
   April 2016
   https://github.com/omarcostahamido
@@ -24,11 +27,13 @@ KetaiSensor sensor;
 
 String wekIP="";
 boolean ready=false;
-float rotX, rotY, rotZ;
+PVector magneticField;//
+//float rotX, rotY, rotZ;
 
 void setup() {
   sensor = new KetaiSensor(this);
   sensor.start();
+  magneticField = new PVector();//
   orientation(LANDSCAPE);
   textSize(height/22);//32
   textAlign(CENTER, CENTER);
@@ -55,9 +60,9 @@ void draw() {
   {
     text("Android Feature Extractor" + "\n"
       + "\n"
-      + "x: " + nfp(rotX, 1, 2) + " " 
-      + "y: " + nfp(rotY, 1, 2) + " " 
-      + "z: " + nfp(rotZ, 1, 2) + "\n"
+      + "x: " + nfp(magneticField.x, 1, 2) + " " 
+      + "y: " + nfp(magneticField.y, 1, 2) + " " 
+      + "z: " + nfp(magneticField.z, 1, 2) + "\n"
       + "\n"
       + "#flawless", width/2, height/2);
       
@@ -66,9 +71,9 @@ void draw() {
     
     //send it to wek now
     OscMessage afeMessage = new OscMessage("/wek/inputs");
-      afeMessage.add((float)rotX); 
-      afeMessage.add((float)rotY);
-      afeMessage.add((float)rotZ);
+      afeMessage.add((float)magneticField.x); 
+      afeMessage.add((float)magneticField.y);
+      afeMessage.add((float)magneticField.z);
     oscP5.send(afeMessage, wekAddress);
   }
 }
@@ -95,9 +100,15 @@ void keyPressed()
 
 //------
 
+/*
 void onRotationVectorEvent(float x, float y, float z)
 {
   rotX = x;
   rotY = y;
   rotZ = z;
+}
+*/
+void onMagneticFieldEvent(float x, float y, float z)
+{
+  magneticField.set(x, y, z);
 }
