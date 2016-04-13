@@ -43,7 +43,7 @@ After installing application and openning it you need:
 Tips: change your android device's screen light duration to prevent it from going to sleep.
 
 Limitations: if you make a mistake entering your IP number you need to restart app. There
-is no delete here, you need to be #flawless ;)
+is no delete here: Do or do not, there is no try!
 
 If you need help or you want to work with me to turn this app #1 on the Play Store, my
 contacts are at the top of this document.
